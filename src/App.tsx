@@ -1,25 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import { fileSaver, someString } from './utils'
+import { Paths } from './pages/Paths';
+import { Points } from './pages/Points';
+import { Routes, Route, NavLink } from "react-router-dom";
+import { PointIcon, PathIcon } from './icons';
+import './App.scss';
+
 
 function App() {
+  const [points, setPoints] = useState<number[]>([])
+  const [paths, setPaths] = useState<number[]>([])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <main className='app'>
+      <nav>
+        <NavLink
+          to="points"
+          className={({ isActive }) =>
+            isActive ? `nav_item active` : `nav_item`
+          }
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <p>Location</p>
+          <PointIcon />
+        </NavLink>
+
+        <NavLink
+          to="paths"
+          className={({ isActive }) =>
+            isActive ? `nav_item active` : `nav_item`
+          }
+        >
+          <p>Path</p>
+          <PathIcon />
+        </NavLink>
+      </nav>
+
+      <section className='items_bar'>
+        <Routes>
+          <Route path="/paths" element={<Paths data={paths} />} />
+          <Route path="/points" element={<Points data={points} />} />
+        </Routes>
+      </section>
+
+      <section className='action_bar'>
+
+      </section>
+    </main>
   );
 }
 
