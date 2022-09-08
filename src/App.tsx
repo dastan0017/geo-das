@@ -4,7 +4,7 @@ import { fileSaver, someString } from './utils'
 import { Paths } from './pages/Paths';
 import { Points } from './pages/Points';
 import { Routes, Route, NavLink } from "react-router-dom";
-import { PointIcon, PathIcon } from './icons';
+import { PointIcon, PathIcon, FileIcon } from './icons';
 import './App.scss';
 
 
@@ -44,7 +44,19 @@ function App() {
       </section>
 
       <section className='action_bar'>
+        <button className="btn btn_green">
+          <FileIcon />
+          <p>
+            Generate file
+          </p>
+        </button>
 
+        <button className='btn btn_blue'>
+          <PointIcon />
+          <p>
+            Add location
+          </p>
+        </button>
       </section>
     </main>
   );
