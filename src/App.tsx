@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import { fileSaver } from './utils'
 import { Paths } from './pages/Paths';
 import { Points } from './pages/Points';

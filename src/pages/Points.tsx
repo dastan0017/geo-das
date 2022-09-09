@@ -1,5 +1,4 @@
 import { Empty } from "../components/Empty"
-import { Loading } from "../components/Loading"
 import { PointIcon, DeleteIcon } from "../icons"
 import './Pages.scss'
 

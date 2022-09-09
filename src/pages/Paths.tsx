@@ -1,6 +1,7 @@
 import { Empty } from "../components/Empty"
 import { PointIcon, DeleteIcon } from "../icons"
 import './Pages.scss'
+
 interface PathsProps {
     data: [number, number][],
     deletePath: (index: number) => void
