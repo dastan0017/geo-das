@@ -113,22 +113,21 @@ export const getPosition = () => {
 	let latitude: number = 0;
 
 	var options = {
-		enableHighAccuracy: true,
-		timeout: 5000,
+		enableHighAccuracy: false,
+		timeout: 100000,
 		maximumAge: 0,
 	};
 
 	function success(pos: any) {
 		var crd = pos.coords;
 
-		if (crd.accuracy > 30) {
-			getPosition();
-		}
-
 		console.log("Ваше текущее местоположение:");
 		console.log(`Широта: ${crd.latitude}`);
 		console.log(`Долгота: ${crd.longitude}`);
 		console.log(`Плюс-минус ${crd.accuracy} метров.`);
+
+		longitude = crd.longitude;
+		latitude = crd.latitude;
 	}
 
 	function error(err: any) {

@@ -1,0 +1,23 @@
+.items_container {
+	margin-top: 1rem;
+	& .item {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 25px;
+
+		& svg:hover {
+			cursor: pointer;
+		}
+
+		&_coords {
+			display: flex;
+			font-size: 20px;
+
+			& p {
+				margin-right: 1rem;
+			}
+		}
+	}
+}

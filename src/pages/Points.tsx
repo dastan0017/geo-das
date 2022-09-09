@@ -1,13 +1,32 @@
+import { Empty } from "../components/Empty"
 import { Loading } from "../components/Loading"
+import { PointIcon, DeleteIcon } from "../icons"
+import './Pages.scss'
 
 interface PointsProps {
-    data: number[]
+    data: [number, number][],
+    deletePoint: (id: number) => void
 }
 
-export const Points = ({ data }: PointsProps) => {
+export const Points = ({ data, deletePoint }: PointsProps) => {
     return (
-        <div>
-            <h1>POINTS PAGE</h1>
+        <div className="items_container">
+            {!data.length ? <Empty /> :
+                <>
+                    {data.map((item, idx) => (
+                        <div className="item" key={idx}>
+                            <PointIcon />
+                            <div className="item_coords">
+                                <p>{item[0]}</p>
+                                <p>{item[1]}</p>
+                            </div>
+                            <DeleteIcon onClick={() => {
+                                deletePoint(idx)
+                            }} />
+                        </div>
+                    ))}
+                </>
+            }
         </div>
     )
 }
