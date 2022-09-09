@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { fileSaver } from './utils'
 import { Paths } from './pages/Paths';
 import { Points } from './pages/Points';
-import { Routes, Route, NavLink, useLocation } from "react-router-dom";
+import { Routes, Route, NavLink, useLocation, Navigate } from "react-router-dom";
 import { PointIcon, PathIcon, FileIcon, DirectionIcon } from './icons';
 import './App.scss';
 import { generateKMLString } from './components/KmlStringGenerator';
@@ -105,6 +105,7 @@ function App() {
         <Routes>
           <Route path="/paths" element={<Paths data={paths} deletePath={deletePath} />} />
           <Route path="/points" element={<Points data={points} deletePoint={deletePoint} />} />
+          <Route path="*" element={<Navigate to="/points" replace />} />
         </Routes>
       </section>
 
