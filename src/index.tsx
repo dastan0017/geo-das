@@ -4,8 +4,13 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
+
 import './index.css';
 
+const render = (status: Status) => {
+  return <h1>{status}</h1>;
+};
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,7 +18,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Wrapper apiKey={'AIzaSyBC2l7xUCA16CpxLMchV9hyMz9O2GYaR_Y'!} render={render}>
+        <App />
+      </Wrapper>
     </BrowserRouter>
   </React.StrictMode>
 );

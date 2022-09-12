@@ -10,9 +10,11 @@ import { generateKMLString } from './components/KmlStringGenerator';
 
 function App() {
   const location = useLocation();
+  const elevator = new google.maps.ElevationService();
+
 
   const [points, setPoints] = useState<[number, number][]>([])
-  const [paths, setPaths] = useState<[number, number][]>([])
+  const [paths, setPaths] = useState<[number, number, number][]>([])
 
   const addPoint = () => {
     var options = {
@@ -58,7 +60,14 @@ function App() {
       console.log(`Долгота: ${crd.longitude}`);
       console.log(`Плюс-минус ${crd.accuracy} метров.`);
 
-      setPaths([...paths, [crd.longitude, crd.latitude]])
+      elevator.getElevationForLocations({
+        locations: [new google.maps.LatLng(crd.latitude, crd.longitude)]
+      }, (res) => {
+        if (res !== null) {
+          setPaths([...paths, [crd.longitude, crd.latitude, res[0].elevation]])
+        }
+      })
+
     }
 
     function error(err: any) {

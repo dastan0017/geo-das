@@ -1,4 +1,4 @@
-export const generateKMLString = (points: [number, number][], paths: [number, number][]) => {
+export const generateKMLString = (points: [number, number][], paths: [number, number, number][]) => {
     return `<?xml version="1.0" encoding="UTF-8"?>
     <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
     <Document>
@@ -79,7 +79,7 @@ export const generateKMLString = (points: [number, number][], paths: [number, nu
             <LookAt>
                 <longitude>${paths[0][0]}</longitude> <!-- GOES FROM POINT'S LOCATION -->
                 <latitude>${paths[0][1]}</latitude>   <!-- GOES FROM POINT'S LOCATION -->
-                <altitude>700</altitude>	 			 <!-- CONSTANT -->
+                <altitude>${paths[0][2]}</altitude>	 			 <!-- CONSTANT -->
                 <heading>0</heading>
                 <tilt>0</tilt>
                 <gx:fovy>35</gx:fovy>
@@ -90,7 +90,7 @@ export const generateKMLString = (points: [number, number][], paths: [number, nu
             <LineString>
                 <!-- GOES COORDINATES FROM LOOP -->
                 <coordinates>
-                    ${paths.map((path, idx) => `${path[0]}, ${path[1]}, 700`)}  
+                    ${paths.map((path, idx) => `${path[0]}, ${path[1]}, ${path[2]} `).join("")}  
                 </coordinates>
             </LineString>
         </Placemark>
