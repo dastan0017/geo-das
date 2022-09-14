@@ -71,28 +71,27 @@ export const generateKMLString = (points: [number, number][], paths: [number, nu
             </Point>
         </Placemark>`)}
         
-    
-    
+
         <!-- PATH TEMPLATE -->
-        <Placemark id="path">
-            <name>PATH</name>
-            <LookAt>
-                <longitude>${paths[0][0]}</longitude> <!-- GOES FROM POINT'S LOCATION -->
-                <latitude>${paths[0][1]}</latitude>   <!-- GOES FROM POINT'S LOCATION -->
-                <altitude>${paths[0][2]}</altitude>	 			 <!-- CONSTANT -->
-                <heading>0</heading>
-                <tilt>0</tilt>
-                <gx:fovy>35</gx:fovy>
-                <range>400</range>
-                <altitudeMode>absolute</altitudeMode>
-            </LookAt>
-            <styleUrl>#styles</styleUrl>
+        <Style id="yellowLineGreenPoly">
+            <LineStyle>
+                <color>7f00ffff</color>
+                <width>4</width>
+            </LineStyle>
+            <PolyStyle>
+                <color>7f00ff00</color>
+            </PolyStyle>
+        </Style> 
+        <Placemark>
+            <name>Линия вдоль земной поверхности</name>
+            <description>Прозрачная зеленая стена с желтыми краями</description>
+            <styleUrl>#yellowLineGreenPoly</styleUrl>
             <LineString>
-                <!-- GOES COORDINATES FROM LOOP -->
-                <coordinates>
-                    ${paths.map((path, idx) => `${path[0]}, ${path[1]}, ${path[2]} `).join("")}  
-                </coordinates>
-            </LineString>
+                <extrude>1</extrude>
+                <tessellate>1</tessellate>
+                <altitudeMode>absolute</altitudeMode>
+                <coordinates> ${paths.map((path, idx) => `${path[0]},${path[1]},${path[2]}\n `).join("")} </coordinates>
+            </LineString> 
         </Placemark>
     </Document>
     </kml>
