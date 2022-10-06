@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap");
-
+@import "bootstrap/dist/css/bootstrap.min.css";
 body {
 	margin: 0;
 	font-family: "Ubuntu Mono", monospace;
@@ -38,4 +38,13 @@ button:hover {
 
 ::-webkit-scrollbar-track {
 	background: transparent;
+}
+
+h1 {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+h3 {
+	font-size: 18px;
 }

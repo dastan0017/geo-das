@@ -13,7 +13,10 @@
 	.items_bar {
 		overflow-y: auto;
 		margin: 4px 0;
-		height: 80vh;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 
 	.action_bar {
