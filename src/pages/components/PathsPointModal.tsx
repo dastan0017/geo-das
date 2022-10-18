@@ -1,43 +1,50 @@
 import { Button, Modal } from 'react-bootstrap'
-import { useForm, Controller } from 'react-hook-form'
-import Select from 'react-select';
+import { useForm } from 'react-hook-form'
 import { DeleteIcon, PointIcon } from '../../icons';
-import { IPoint, PointIconEnum } from '../../App';
+import { IPoint } from '../../App';
 import './Modals.scss'
-import { IEditablePoint } from '../Points';
 import { useEffect } from 'react';
+import { IEditablePoint } from '../Points';
+import { useParams } from 'react-router-dom';
 
-interface PointModalProps {
-    addPoint: (data: IPoint) => void;
+interface PathsPointModalProps {
     show: boolean;
-    onHide: () => void;
     modalType: "edit" | "add" | "delete";
     initialData: IEditablePoint | undefined;
-    editPoint: (data: IPoint, idx: number) => void;
-    deletePoint: (idx: number) => void;
+    onHide: () => void;
+    addPointToPath: (data: IPoint, idx: number) => void;
+    editPointInPath: (data: IPoint, idx: number, pointIdx: number) => void;
+    deletePointInPath: (idx: number, pointIdx: number) => void;
 }
 
-export const PointModal = ({ addPoint, show, onHide, modalType, initialData, editPoint, deletePoint }: PointModalProps) => {
-    const { register, handleSubmit, control, reset } = useForm({})
+export const PathsPointModal = ({ show, modalType, initialData, onHide, editPointInPath, addPointToPath, deletePointInPath }: PathsPointModalProps) => {
+    const { register, handleSubmit, control, formState: { errors }, reset } = useForm({})
+    const { pathId } = useParams()
 
     useEffect(() => {
         if (modalType === "edit") {
             // Set initial values
-            reset({ ...initialData, icon: initialData?.icon })
+            reset(initialData)
         } else {
-            reset({ name: "", description: "", longitude: 0.00, latitude: 0.00, icon: null })
+            reset({ name: "", description: "", lineWidth: 1, lineColor: "#f6b73c" })
         }
     }, [initialData, modalType, reset])
 
-
     const onSubmit = (formData: any) => {
+        console.log("formData", formData)
         if (!formData?.target) {
             if (modalType === 'edit' && initialData) {
-                editPoint(formData, initialData.idx)
+                if (pathId) {
+                    editPointInPath(formData, +pathId, initialData.idx)
+                }
             } else if (modalType === "add") {
-                addPoint(formData)
+                if (pathId) {
+                    addPointToPath(formData, +pathId)
+                }
             } else if (modalType === "delete" && initialData) {
-                deletePoint(initialData.idx)
+                if (pathId) {
+                    deletePointInPath(+pathId, initialData.idx)
+                }
             }
 
             setTimeout(() => {
@@ -45,13 +52,7 @@ export const PointModal = ({ addPoint, show, onHide, modalType, initialData, edi
                 onHide()
             }, 200)
         }
-
     }
-
-    const options = [
-        { value: PointIconEnum.icon1, label: 'Main point' },
-        { value: PointIconEnum.icon2, label: 'Point for path' },
-    ];
 
     return (
         <Modal
@@ -86,33 +87,9 @@ export const PointModal = ({ addPoint, show, onHide, modalType, initialData, edi
                                 <label htmlFor="latitude">Широта</label>
                                 <input {...register("latitude")} type="number" step={0.0000001} />
                             </div>
-
                             <div className="form_item">
-                                <label htmlFor="icon">Иконка</label>
-                                <Controller
-                                    name="icon"
-                                    control={control}
-                                    render={({ field: { onChange, value, ref }, formState, fieldState }) => (
-                                        <>
-                                            <Select
-                                                options={options}
-                                                onChange={val => {
-                                                    try {
-                                                        onChange(val?.value);
-                                                    } catch (err) {
-                                                        console.log(err)
-                                                    }
-                                                }}
-                                                formatOptionLabel={icon => (
-                                                    <div>
-                                                        <img src={icon?.value} alt="Point icon" width="30" height="30" />
-                                                        <span>{icon?.label} </span>
-                                                    </div>
-                                                )}
-                                            />
-                                        </>
-                                    )}
-                                />
+                                <label htmlFor="height">Высота</label>
+                                <input {...register("height")} type="number" step={0.0000001} />
                             </div>
                         </>
                     )}
@@ -128,12 +105,12 @@ export const PointModal = ({ addPoint, show, onHide, modalType, initialData, edi
                                 <DeleteIcon />
                                 <p>Да, удалить!</p>
                             </>
-                        ) : (
-                            <>
+                        ) :
+                            (<>
                                 <PointIcon />
                                 <p>Confirm</p>
-                            </>
-                        )}
+                            </>)
+                        }
                     </Button>
                 </Modal.Footer>
             </form>

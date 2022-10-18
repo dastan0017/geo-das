@@ -23,17 +23,21 @@ export const Points = ({ data, deletePoint, addPoint, editPoint, exportKMLFile }
     const handleShow = () => setIsModalOpen(true);
 
     const [modalData, setModalData] = useState<IEditablePoint>()
-    const [modalType, setModalType] = useState<"edit" | "add">("add")
+    const [modalType, setModalType] = useState<"edit" | "add" | "delete">("add")
 
     const openEditModal = (data: IPoint, idx: number) => {
         setModalType("edit")
         setModalData({ idx, ...data })
         handleShow()
     }
-
     const openAddModal = () => {
         setModalType("add")
         setModalData(undefined)
+        handleShow()
+    }
+    const openDeleteModal = (data: IPoint, idx: number) => {
+        setModalType("delete")
+        setModalData({ idx, ...data })
         handleShow()
     }
 
@@ -50,7 +54,7 @@ export const Points = ({ data, deletePoint, addPoint, editPoint, exportKMLFile }
                                 </div>
                                 <div style={{ display: "flex" }}>
                                     <EditIcon style={{ marginRight: "1rem" }} onClick={() => openEditModal(item, idx)} />
-                                    <DeleteIcon onClick={() => { deletePoint(idx) }} />
+                                    <DeleteIcon onClick={() => openDeleteModal(item, idx)} />
                                 </div>
                             </div>
                         ))}
@@ -73,7 +77,7 @@ export const Points = ({ data, deletePoint, addPoint, editPoint, exportKMLFile }
                 </button>
             </section>
 
-            <PointModal show={isModalOpen} onHide={handleClose} addPoint={addPoint} modalType={modalType} initialData={modalData} editPoint={editPoint} />
+            <PointModal show={isModalOpen} onHide={handleClose} addPoint={addPoint} modalType={modalType} initialData={modalData} editPoint={editPoint} deletePoint={deletePoint} />
         </>
     )
 }
