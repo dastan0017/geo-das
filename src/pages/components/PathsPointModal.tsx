@@ -18,7 +18,7 @@ interface PathsPointModalProps {
 }
 
 export const PathsPointModal = ({ show, modalType, initialData, onHide, editPointInPath, addPointToPath, deletePointInPath }: PathsPointModalProps) => {
-    const { register, handleSubmit, control, formState: { errors }, reset } = useForm({})
+    const { register, handleSubmit, reset } = useForm({})
     const { pathId } = useParams()
 
     useEffect(() => {
