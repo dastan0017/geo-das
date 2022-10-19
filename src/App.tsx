@@ -67,7 +67,9 @@ function App() {
 
   const addPoint = (data: IPoint) => {
     console.log("add: \n", data)
-    setPoints([...points, data])
+    setPoints((prev) => {
+      return [...prev, data]
+    })
   }
   const editPoint = (data: IPoint, idx: number) => {
     setPoints((prev) => {
@@ -83,7 +85,9 @@ function App() {
 
   const addPath = (data: IPath) => {
     console.log("Add: \n", data)
-    setPaths([...paths, { ...data, points: [] }])
+    setPaths((prev) => {
+      return [...prev, { ...data, points: [] }]
+    })
   }
   const editPath = (data: IPath, idx: number) => {
     setPaths((prev) => {
