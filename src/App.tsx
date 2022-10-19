@@ -43,8 +43,8 @@ function App() {
 
   useEffect(() => {
     window.addEventListener("beforeunload", () => {
-      localStorage.setItem("points", JSON.stringify(points))
-      localStorage.setItem("paths", JSON.stringify(paths))
+      localStorage.setItem("points", JSON.stringify(points?.length ? points : "[]"))
+      localStorage.setItem("paths", JSON.stringify(paths?.length ? paths : "[]"))
     });
 
     return () => {
