@@ -54,8 +54,8 @@ function App() {
 
   useEffect(() => {
     setTimeout(() => {
-      let pointsString = localStorage.getItem("points") || "{}"
-      let pathsString = localStorage.getItem("paths") || "{}"
+      let pointsString = localStorage.getItem("points") || "[]"
+      let pathsString = localStorage.getItem("paths") || "[]"
 
       let points = JSON.parse(pointsString)
       let paths = JSON.parse(pathsString)
