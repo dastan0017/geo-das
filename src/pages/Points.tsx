@@ -46,7 +46,7 @@ export const Points = ({ data, deletePoint, addPoint, editPoint, exportKMLFile }
             <div className="items_container">
                 {!data.length ? <Empty /> :
                     <>
-                        {data.map((item, idx) => (
+                        {data?.map((item, idx) => (
                             <div className="item" key={idx}>
                                 <img src={item.icon} alt="Point icon" width="30" height="30" />
                                 <div className="item_coords">

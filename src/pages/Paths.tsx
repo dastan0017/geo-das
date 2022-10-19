@@ -47,7 +47,7 @@ export const Paths = ({ data, exportKMLFile, deletePath, addPath, editPath }: Pa
             <div className="items_container">
                 {!data.length ? <Empty /> :
                     <>
-                        {data.map((item, idx) => (
+                        {data?.map((item, idx) => (
                             <div className="item" key={idx}>
                                 <PathIcon />
                                 <Link to={idx.toString()} className="item_coords">

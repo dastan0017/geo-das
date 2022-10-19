@@ -57,11 +57,11 @@ function App() {
       let pointsString = localStorage.getItem("points") || "[]"
       let pathsString = localStorage.getItem("paths") || "[]"
 
-      let points = JSON.parse(pointsString === "{}" ? "[]" : pointsString)
-      let paths = JSON.parse(pathsString === "{}" ? "[]" : pathsString)
+      let points = JSON.parse(pointsString)
+      let paths = JSON.parse(pathsString)
 
-      setPoints(points as IPoint[])
-      setPaths(paths as IPath[])
+      setPoints(!Array.isArray(points) ? [] : points as IPoint[])
+      setPaths(!Array.isArray(paths) ? [] : paths as IPath[])
     }, 1000)
   }, [])
 

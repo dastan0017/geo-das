@@ -67,7 +67,7 @@ export const PathPoints = ({ paths, exportKMLFile, deletePointInPath, addPointTo
                 </div>
                 {!data?.length ? <Empty /> :
                     <>
-                        {data.map((item, idx) => (
+                        {data?.map((item, idx) => (
                             <div className="item" key={idx}>
                                 <PointIcon />
                                 <div className="item_coords">
