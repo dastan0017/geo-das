@@ -80,11 +80,11 @@ export const PointModal = ({ addPoint, show, onHide, modalType, initialData, edi
 
                             <div className="form_item">
                                 <label htmlFor="longitude">Долгота</label>
-                                <input {...register("longitude")} type="number" step={0.0000001} />
+                                <input {...register("longitude")} type="number" step={0.00000000000001} />
                             </div>
                             <div className="form_item">
                                 <label htmlFor="latitude">Широта</label>
-                                <input {...register("latitude")} type="number" step={0.0000001} />
+                                <input {...register("latitude")} type="number" step={0.00000000000001} />
                             </div>
 
                             <div className="form_item">

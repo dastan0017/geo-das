@@ -23,7 +23,7 @@ export const generateKMLString = (points: IPoint[], paths: IPath[], fileName: st
                 <styleUrl>#point_style_${idx}</styleUrl>
 
                 <Point>
-                    <coordinates>${point.longitude},${point.latitude},0</coordinates>
+                    <coordinates>${point.latitude},${point.longitude},0</coordinates>
                 </Point>
             </Placemark>`)}
             
@@ -53,7 +53,7 @@ export const generateKMLString = (points: IPoint[], paths: IPath[], fileName: st
                     <LineString>
                         <extrude>1</extrude>
                         <tessellate>1</tessellate>
-                        <coordinates> 74.65704993050124,42.65249314001015,0 74.65849202708142,42.65235746027895,0 74.65936081887294,42.65234086345829,0 74.65996319241982,42.65231916423107,0 74.66139658334727,42.65228603279965,0 </coordinates>
+                        <coordinates> ${path.points.map((point, idx) => `${point.latitude},${point.longitude},0 `).join("")} </coordinates>
                     </LineString>
                 </Placemark>`
         })}

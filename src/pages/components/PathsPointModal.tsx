@@ -75,21 +75,16 @@ export const PathsPointModal = ({ show, modalType, initialData, onHide, editPoin
                             </div>
 
                             <div className="form_item">
-                                <label htmlFor="description">Описание</label>
-                                <textarea {...register("description")} placeholder="Введите описание" />
-                            </div>
-
-                            <div className="form_item">
                                 <label htmlFor="longitude">Долгота</label>
-                                <input {...register("longitude")} type="number" step={0.0000001} />
+                                <input {...register("longitude")} type="number" step={0.00000000000001} />
                             </div>
                             <div className="form_item">
                                 <label htmlFor="latitude">Широта</label>
-                                <input {...register("latitude")} type="number" step={0.0000001} />
+                                <input {...register("latitude")} type="number" step={0.00000000000001} />
                             </div>
                             <div className="form_item">
                                 <label htmlFor="height">Высота</label>
-                                <input {...register("height")} type="number" step={0.0000001} />
+                                <input {...register("height")} type="number" step={0.00000000000001} />
                             </div>
                         </>
                     )}
